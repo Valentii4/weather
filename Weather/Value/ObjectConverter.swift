@@ -45,7 +45,7 @@ class ObjectConverter {
         case "c":
             return "штиль"
         default:
-            return ""
+            return windDir
         }
     }
     
@@ -91,8 +91,14 @@ class ObjectConverter {
             return "небольшой снег"
         case "snow":
             return "снег"
+        case "wet-snow":
+            return "мокрый снег"
+        case "light-rain":
+            return "мелкий дождь"
+        case "rain":
+            return "дождь"
         default:
-            return ""
+            return condition
         }
     }
 }

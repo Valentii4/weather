@@ -19,12 +19,14 @@ class WeatherHeaderViewController: UIViewController, Storyboarded {
                 DispatchQueue.main.async {
                     self.tempLabel.text = self.weatherViewModel?.temp
                     self.cityLabel.text = self.weatherViewModel?.cityName
+                    self.conditionLabel.text =  self.weatherViewModel?.condition
                     self.weatherViewModel?.bindUpdateImage()
                 }
             }
         }
     }
     
+    @IBOutlet weak var conditionLabel: UILabel!
     @IBOutlet weak var picture: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!

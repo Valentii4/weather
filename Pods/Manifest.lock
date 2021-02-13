@@ -3,46 +3,32 @@ PODS:
   - CocoaLumberjack (3.7.0):
     - CocoaLumberjack/Core (= 3.7.0)
   - CocoaLumberjack/Core (3.7.0)
-  - ObjectMapper (4.2.0)
-  - RxCocoa (5.1.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.1.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.1)
   - SVGKit (2.1.1):
     - CocoaLumberjack (~> 3.0)
   - Swinject (2.7.1)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
-  - ObjectMapper
-  - RxCocoa
-  - RxSwift
   - SVGKit
   - Swinject
+  - Toast-Swift
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - CocoaLumberjack
-    - ObjectMapper
-    - RxCocoa
-    - RxRelay
-    - RxSwift
     - SVGKit
     - Swinject
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
-  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
-  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
-  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SVGKit: 652cdf7bef8bec8564d04a8511d3ab50c7595fac
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 75864f21b2d5f67637804362da84254bab03de46
+PODFILE CHECKSUM: c5e1a0fba944ee736f415053c7f0fc6db059789f
 
 COCOAPODS: 1.8.4

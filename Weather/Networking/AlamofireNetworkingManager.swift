@@ -7,7 +7,6 @@
 
 import Foundation
 import Alamofire
-import ObjectMapper
 class AlamofireNetworkingManager {
     private let API_KEY: String = "e2d989bc-affa-474f-bfe5-43db338de5a4"
     private let LANGUAGE: String = "ru_RU"

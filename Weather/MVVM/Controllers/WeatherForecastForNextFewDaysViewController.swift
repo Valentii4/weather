@@ -20,9 +20,8 @@ class WeatherForecastForNextFewDaysViewController: UIViewController {
         collectionsDays.delegate = self
         collectionsDays.dataSource = self
     }
-
-
 }
+
 //MARK: - Collection View Delegate
 extension WeatherForecastForNextFewDaysViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

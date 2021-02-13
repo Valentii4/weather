@@ -27,11 +27,15 @@ class ForecastsForCitiesViewModel {
 
     func getWeatherViewModelWithIndexPath(row: Int) -> WeatherViewModel{
         let cityName = arrayCitysKey[row]
+        return getWeatherViewModelWithCityName(cityName: cityName)
+    }
+    
+    func getWeatherViewModelWithCityName(cityName: String) -> WeatherViewModel{
         if let vm = cache.object(forKey: cityName as NSString){
             return vm
         }
 
-        let vmWeather = WeatherViewModel(cityName: cityName, imageName: nil,codition: nil,temp: nil)
+        let vmWeather = WeatherViewModel(cityName: cityName, imageName: nil, codition: nil,temp: nil)
         guard let cityPoint = citys[cityName] else{
             return vmWeather
         }
@@ -43,6 +47,8 @@ class ForecastsForCitiesViewModel {
         }
         return vmWeather
     }
+    
+    
     
 }
     

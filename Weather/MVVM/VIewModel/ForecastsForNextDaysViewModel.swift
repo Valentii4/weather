@@ -64,13 +64,12 @@ class ForecastsForNextDaysViewModel: WeatherViewModel {
         case.windSpeed:
             return String(weather.windSpeed)
         case .windDir:
-            return weather.windDir ?? ""
+            return weather.windDir
         case .condition:
-            return weather.condition ?? ""
+            return weather.condition
         case .pressure:
             return String(weather.pressure)
         }
-        
     }
     
     private func getWeatherInformation(indexPath row: Int) -> WeatherInformation{

@@ -10,12 +10,12 @@ struct Weather: Response {
     let tempAvg: Int
     let tempMax: Int
     let tempMin: Int
-    var condition: String? = nil
+    var condition: String
     let icon: String
     let windSpeed: Double
-    var windDir: String? = nil
+    var windDir: String
     let pressure: Int
-    var cloudness: String? = nil
+    var cloudness: String
     var date: Date?
     
     init(json: [String: Any]) {

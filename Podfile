@@ -8,10 +8,8 @@ target 'Weather' do
   # Pods for Weather
 	pod 'Swinject'
 	pod 'Alamofire'
-	pod 'RxSwift'
-	pod 'RxCocoa'
 	pod 'SVGKit'
-	pod 'ObjectMapper'
+	pod 'Toast-Swift'
 
   target 'WeatherTests' do
     inherit! :search_paths

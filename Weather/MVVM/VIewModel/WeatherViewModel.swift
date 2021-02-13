@@ -27,13 +27,13 @@ class WeatherViewModel{
         self.cityName = cityName
         self.temp = tepmToString(temp: temp)
         self.imageName = imageName
+        self.condition = codition
         self.tempInt = temp
         if let imageName = imageName{
             setImageWithName(name: imageName)
         }
     }
     
-
     func setWeatherItem(weatherItem: WeatherItem){
         self.weatherItem = weatherItem
     }

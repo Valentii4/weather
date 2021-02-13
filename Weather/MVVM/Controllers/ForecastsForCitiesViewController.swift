@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Toast_Swift
 private let reuseIdentifier = "weatherCell"
 
 final class ForecastsForCitiesViewController: UIViewController, Storyboarded {
@@ -20,8 +20,24 @@ final class ForecastsForCitiesViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         forecastsTableView.delegate = self
         forecastsTableView.dataSource = self
+        weatherSearchBar.delegate = self
     }
 }
+//MARK: - UITextFildDelegate
+extension ForecastsForCitiesViewController: UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let cityName = weatherSearchBar.text, let weatherViewModel = forecastsViewModel?.getWeatherViewModelWithCityName(cityName: cityName) else {
+            return
+        }
+        if(weatherViewModel.temp == nil){
+            self.forecastsTableView.makeToast("Погода в городе \(cityName), не найдена", duration: 2.0, position: .top)
+            return
+        }
+        coordinator?.presentWeatherTableViewController(weatherViewModel: weatherViewModel)
+        weatherSearchBar.text = ""
+    }
+}
+
 //MARK: - TableViewDelegate
 extension ForecastsForCitiesViewController: UITableViewDelegate, UITableViewDataSource{
     
@@ -41,6 +57,10 @@ extension ForecastsForCitiesViewController: UITableViewDelegate, UITableViewData
             return
         }
         coordinator?.presentWeatherTableViewController(weatherViewModel: weatherViewModel)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.view.endEditing(true)
     }
 }
 
