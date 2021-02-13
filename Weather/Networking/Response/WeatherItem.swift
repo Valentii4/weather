@@ -18,7 +18,7 @@ struct WeatherItem: Response{
         let fact = json["fact"] as! [String:Any]
         temp = fact["temp"] as! Int
         iconName = fact["icon"] as! String
-        condition = fact["condition"] as! String
+        condition = ObjectConverter.convertCondition(condition: fact["condition"] as! String)
         
         let geoObject = json["geo_object"] as! [String:Any]
         let province = geoObject["province"] as! [String:Any]
@@ -27,7 +27,6 @@ struct WeatherItem: Response{
         let forecasts =  json["forecasts"] as! [[String: Any]]
         day = getWeathers(timeDay: .day, forecasts: forecasts)
         night = getWeathers(timeDay: .night, forecasts: forecasts)
-        
     }
     
     
