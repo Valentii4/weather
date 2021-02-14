@@ -55,6 +55,8 @@ extension CitiesViewContorller: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWeatherVM = citiesViewModel.getWeatherViewModelWithIndexPath(row: indexPath.row)
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.isSelected = false 
         pushWeatherTableVC(selectedWeatherVM: selectedWeatherVM)
     }
 }
