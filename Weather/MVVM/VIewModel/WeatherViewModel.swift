@@ -10,14 +10,14 @@ import UIKit
 
 class WeatherViewModel{
     @InjectImageManager private var imageManager: ImageManager
-    private let TEMP_CALCULUS_SYSTEM = " °C"
-    private var weatherItem: WeatherItem?
+    private var weatherItem: WeatherForecst?
     private(set) var imageName: String?
     private(set) var tempInt: Int?
     private(set) var date: String?
     private(set) var image: UIImage?
     private(set) var temp: String?
     private(set) var condition: String?
+    private(set) var isInfoFill: Bool = false
     let cityName: String
     
     var bindUpdateInformationOnView: (() -> ()) = {}
@@ -25,25 +25,29 @@ class WeatherViewModel{
     
     init(cityName: String, imageName: String?, codition: String?, temp: Int?){
         self.cityName = cityName
-        self.temp = tepmToString(temp: temp)
+        self.temp = ObjectConverter.tepmToString(temp: temp)
         self.imageName = imageName
         self.condition = codition
         self.tempInt = temp
         if let imageName = imageName{
             setImageWithName(name: imageName)
         }
+        if imageName != nil, codition != nil, temp != nil{
+            isInfoFill = true
+        }
     }
     
-    func setWeatherItem(weatherItem: WeatherItem){
-        self.weatherItem = weatherItem
+    func setWeatherForecast(weatherForecast: WeatherForecst){
+        self.weatherItem = weatherForecast
     }
     
     func setInformationOfWeather(temp: Int, condition: String, iconName: String){
-        self.temp = tepmToString(temp: temp)
+        self.temp = ObjectConverter.tepmToString(temp: temp)
         self.condition = condition
         if imageName != iconName || image == nil{
             setImageWithName(name: iconName)
         }
+        isInfoFill = true
         bindUpdateInformationOnView()
     }
     
@@ -62,14 +66,8 @@ class WeatherViewModel{
         bindUpdateInformationOnView()
     }
     
-    func getForecastsForNextDaysViewModel() -> ForecastsForNextDaysViewModel?{
+    func getWeatherForecast() -> WeatherForecastsViewModel?{
         guard let weather = weatherItem?.day else{ return nil }
-        return ForecastsForNextDaysViewModel(weatherForNextDays: weather, cityName: cityName)
+        return WeatherForecastsViewModel(weatherForecast: weather, cityName: cityName)
     }
-    
-    func tepmToString(temp: Int?) -> String?{
-        guard let tempInt = temp else{ return nil }
-        return String(tempInt) + TEMP_CALCULUS_SYSTEM
-    }
-    
 }

@@ -10,25 +10,36 @@ struct Weather: Response {
     let tempAvg: Int
     let tempMax: Int
     let tempMin: Int
-    var condition: String
+    let condition: String
     let icon: String
     let windSpeed: Double
-    var windDir: String
+    let windDir: String
     let pressure: Int
-    var cloudness: String
+    let cloudness: String
     var date: Date?
     
-    init(json: [String: Any]) {
-        tempAvg = json["temp_avg"] as! Int
-        tempMax = json["temp_max"] as! Int
-        tempMin = json["temp_min"] as! Int
-        icon = json["icon"] as! String
-        windSpeed = json["wind_speed"] as! Double
-        pressure = json["pressure_mm"] as! Int
-        cloudness = ObjectConverter.convertCloudness(cloudness: json["cloudness"] as! Double)
-        windDir = ObjectConverter.converWindDir(windDir: json["wind_dir"] as! String)
-        condition = ObjectConverter.convertCondition(condition: json["condition"] as! String)
+    init?(json: [String: Any]) {
+        guard
+        let tempAvg = json["temp_avg"] as? Int,
+        let tempMax = json["temp_max"] as? Int,
+        let tempMin = json["temp_min"] as? Int,
+        let icon = json["icon"] as? String,
+        let windSpeed = json["wind_speed"] as? Double,
+        let pressure = json["pressure_mm"] as? Int,
+        let cloudness =  json["cloudness"] as? Double,
+        let windDir = json["wind_dir"] as? String,
+        let condition = json["condition"] as? String else{
+            return nil
+        }
+        
+        self.cloudness =  ObjectConverter.convertCloudness(cloudness: cloudness)
+        self.windDir = ObjectConverter.converWindDir(windDir: windDir)
+        self.condition =  ObjectConverter.convertCondition(condition: condition)
+        self.tempAvg = tempAvg
+        self.tempMax = tempMax
+        self.tempMin = tempMin
+        self.icon = icon
+        self.windSpeed = windSpeed
+        self.pressure = pressure
     }
-    
-    
 }

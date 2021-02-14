@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct WeatherItem: Response{
+struct WeatherForecst: Response{
     var day: [Weather] = []
     var night: [Weather] = []
     let city: String
@@ -14,17 +14,23 @@ struct WeatherItem: Response{
     let iconName: String
     let condition: String
     
-    init(json: [String : Any]) {
-        let fact = json["fact"] as! [String:Any]
-        temp = fact["temp"] as! Int
-        iconName = fact["icon"] as! String
-        condition = ObjectConverter.convertCondition(condition: fact["condition"] as! String)
+    init?(json: [String : Any]) {
+        guard let fact = json["fact"] as? [String:Any],
+              let temp = fact["temp"] as? Int,
+              let iconName = fact["icon"] as? String,
+              let condition = fact["condition"] as? String,
+              let geoObject = json["geo_object"] as? [String:Any],
+              let province = geoObject["province"] as? [String:Any],
+              let city = province["name"] as? String,
+              let forecasts =  json["forecasts"] as? [[String: Any]]
+        else {
+            return nil
+        }
         
-        let geoObject = json["geo_object"] as! [String:Any]
-        let province = geoObject["province"] as! [String:Any]
-        city = province["name"] as! String
-        
-        let forecasts =  json["forecasts"] as! [[String: Any]]
+        self.temp = temp
+        self.iconName = iconName
+        self.city = city
+        self.condition = ObjectConverter.convertCondition(condition: condition)
         day = getWeathers(timeDay: .day, forecasts: forecasts)
         night = getWeathers(timeDay: .night, forecasts: forecasts)
     }
@@ -36,9 +42,10 @@ struct WeatherItem: Response{
             let date = getDateFromForecast(forecast: forecast)
             let parts = forecast["parts"] as! [String:Any]
             let weatherJson = parts[timeDay.rawValue] as! [String:Any]
-            var weatherObject = Weather(json: weatherJson)
-            weatherObject.date = date
-            result.append(weatherObject)
+            if var weatherObject = Weather(json: weatherJson){
+                weatherObject.date = date
+                result.append(weatherObject)
+            }
         }
         return result
     }

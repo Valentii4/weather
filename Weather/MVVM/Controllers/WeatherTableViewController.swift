@@ -10,50 +10,52 @@ import UIKit
 private let tableViewIdentifier = "tableViewIdentifier"
 
 class WeatherTableViewController: UITableViewController, Storyboarded {
-    weak var coordinator: MainCoordinator?
-    var weatherViewModel: WeatherViewModel?
-    var vmWeatherForNextDays: ForecastsForNextDaysViewModel?{
+    var selectedWeatherVM: WeatherViewModel?
+    var weatherForecastsVM: WeatherForecastsViewModel?{
         didSet{
-            vmWeatherForNextDays?.bindUpdateInformationOfWeather = {
+            weatherForecastsVM?.bindUpdateInformationOfWeather = {
                 self.tableView.reloadData()
-                if let vm = self.vmWeatherForNextDays?.weatherVM, let icon = vm.imageName{
-                    self.weatherViewModel?.setInformationOfWeather(temp: vm.tempInt ?? 0, condition: vm.condition ?? "", iconName: icon)
+                guard let vm = self.weatherForecastsVM else {
+                    return
+                }
+                if let icon = vm.selectedImageName, let tempInt = vm.selectedTempInt, let codition = vm.selectedCondition {
+                    self.selectedWeatherVM?.setInformationOfWeather(temp: tempInt, condition: codition, iconName: icon)
                 }
             }
-            vmWeatherForNextDays?.bindUpdateInformationOnView()
+            weatherForecastsVM?.bindUpdateInformationOfWeather()
         }
     }
     
-    @IBOutlet weak var headerView: UIView!
-    @IBSegueAction func createWeatherHeaderViewController(_ coder: NSCoder) -> WeatherHeaderViewController? {
-        let vc = WeatherHeaderViewController(coder: coder)
-        vc?.weatherViewModel = weatherViewModel
+    //MARK: - Outlet/Action
+    @IBOutlet var weatherForecastView: UIView!
+    @IBSegueAction func createWeatherSomeInformationViewController(_ coder: NSCoder) -> WeatherSomeInformationViewController? {
+        let vc = WeatherSomeInformationViewController(coder: coder)
+        vc?.weatherViewModel = selectedWeatherVM
         return vc
     }
     
-    @IBSegueAction func createForecastsForNextDays(_ coder: NSCoder) -> WeatherForecastForNextFewDaysViewController? {
-        let vc = WeatherForecastForNextFewDaysViewController(coder: coder)
-        let vmForecast = weatherViewModel?.getForecastsForNextDaysViewModel()
-        vc?.vmWeatherForNextDays = vmForecast
-        self.vmWeatherForNextDays = vmForecast
+    @IBSegueAction func createWeaherForecastsCollectionView(_ coder: NSCoder) -> WeatherForecastViewController? {
+        let vc = WeatherForecastViewController(coder: coder)
+        let vmForecast = selectedWeatherVM?.getWeatherForecast()
+        vc?.weatherForecastVM = vmForecast
+        self.weatherForecastsVM = vmForecast
         return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = UIView()
+        self.title = selectedWeatherVM?.cityName
     }
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return vmWeatherForNextDays?.numberOfRowsWeatherObject ?? 0
+        return weatherForecastsVM?.numberOfRowsWeatherObject ?? 0
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: tableViewIdentifier, for: indexPath)
-        cell.textLabel?.text = vmWeatherForNextDays?.getTitleWetherObject(indexpath: indexPath.row)
-        cell.detailTextLabel?.text = vmWeatherForNextDays?.getDetailWetherObject(indexpath: indexPath.row)
+        cell.textLabel?.text = weatherForecastsVM?.getTitleWetherObject(indexpath: indexPath.row)
+        cell.detailTextLabel?.text = weatherForecastsVM?.getDetailWetherObject(indexpath: indexPath.row)
 
         return cell
     }

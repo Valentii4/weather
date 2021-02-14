@@ -7,5 +7,5 @@
 
 import Foundation
 protocol Response {
-    init(json: [String:Any])
+    init?(json: [String:Any])
 }

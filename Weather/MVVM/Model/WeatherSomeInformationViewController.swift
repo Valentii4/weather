@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WeatherHeaderViewController: UIViewController, Storyboarded {
+class WeatherSomeInformationViewController: UIViewController, Storyboarded {
     var weatherViewModel: WeatherViewModel?{
         didSet{
             weatherViewModel?.bindUpdateImage = {

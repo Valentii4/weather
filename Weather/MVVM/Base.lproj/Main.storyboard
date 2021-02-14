@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dza-3Z-8yW">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
@@ -9,25 +9,20 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Forecasts For Cities View Controller-->
+        <!--Города-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="ForecastsForCitiesViewController" id="BYZ-38-t0r" customClass="ForecastsForCitiesViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CitiesViewContorller" id="BYZ-38-t0r" customClass="CitiesViewContorller" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Город" translatesAutoresizingMaskIntoConstraints="NO" id="th5-O2-SY9">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vEZ-lx-hnM">
-                                <rect key="frame" x="0.0" y="88" width="414" height="782"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" canCancelContentTouches="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vEZ-lx-hnM">
+                                <rect key="frame" x="0.0" y="132" width="414" height="738"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="weatherCell" rowHeight="148" id="VKp-pp-cnL" customClass="ForecastWeatherInCityTableViewCell" customModule="Weather" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="weatherCell" rowHeight="148" id="VKp-pp-cnL" customClass="CityTableViewCell" customModule="Weather" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VKp-pp-cnL" id="jzt-ar-4xW">
@@ -39,7 +34,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="EcI-pB-LLJ">
                                                     <rect key="frame" x="151" y="11" width="243" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -83,10 +78,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" text="" placeholder="Город" translatesAutoresizingMaskIntoConstraints="NO" id="th5-O2-SY9">
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Города" id="XDL-sd-ywT"/>
                     <connections>
                         <outlet property="forecastsTableView" destination="vEZ-lx-hnM" id="8Oi-fG-42I"/>
                         <outlet property="weatherSearchBar" destination="th5-O2-SY9" id="mYV-O9-HhY"/>
@@ -94,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28.985507246376812" y="88.392857142857139"/>
+            <point key="canvasLocation" x="939.13043478260875" y="88.392857142857139"/>
         </scene>
         <!--Weather Table View Controller-->
         <scene sceneID="X0c-Pu-3vz">
@@ -104,7 +105,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="oYQ-3y-GKN">
+                        <view key="tableHeaderView" contentMode="scaleToFill" restorationIdentifier="headerView" id="oYQ-3y-GKN">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="470"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
@@ -112,17 +113,22 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="341"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <connections>
-                                        <segue destination="MGx-Cm-qn3" kind="embed" destinationCreationSelector="createWeatherHeaderViewController:" id="Uej-PW-0DD"/>
+                                        <segue destination="MGx-Cm-qn3" kind="embed" destinationCreationSelector="createWeatherSomeInformationViewController:" id="Uej-PW-0DD"/>
                                     </connections>
                                 </containerView>
                                 <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEx-rm-ZQI">
                                     <rect key="frame" x="0.0" y="341" width="414" height="129"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                     <connections>
-                                        <segue destination="nlA-K1-hOF" kind="embed" destinationCreationSelector="createForecastsForNextDays:" id="gYQ-1P-A1X"/>
+                                        <segue destination="nlA-K1-hOF" kind="embed" destinationCreationSelector="createWeaherForecastsCollectionView:" id="gYQ-1P-A1X"/>
                                     </connections>
                                 </containerView>
                             </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="Ozd-m8-w56">
+                            <rect key="frame" x="0.0" y="569.5" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                         <prototypes>
@@ -158,17 +164,17 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="headerView" destination="8gm-BK-KdR" id="Os2-5Y-Qol"/>
+                        <outlet property="weatherForecastView" destination="dEx-rm-ZQI" id="88j-nV-Frn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKx-K1-Wae" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1428.985507246377" y="88.392857142857139"/>
+            <point key="canvasLocation" x="2339.130434782609" y="88.392857142857139"/>
         </scene>
-        <!--Weather Header View Controller-->
+        <!--Weather Some Information View Controller-->
         <scene sceneID="3Ti-t0-lce">
             <objects>
-                <viewController storyboardIdentifier="WeatherHeaderViewController" id="MGx-Cm-qn3" customClass="WeatherHeaderViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeatherHeaderViewController" id="MGx-Cm-qn3" customClass="WeatherSomeInformationViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pgp-eH-QVe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="341"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -219,10 +225,10 @@
             </objects>
             <point key="canvasLocation" x="747.82608695652175" y="-392.07589285714283"/>
         </scene>
-        <!--Weather Forecast For Next Few Days View Controller-->
+        <!--Weather Forecast View Controller-->
         <scene sceneID="byG-ev-Oah">
             <objects>
-                <viewController storyboardIdentifier="WeatherForecastForNextFewDaysViewController" id="nlA-K1-hOF" customClass="WeatherForecastForNextFewDaysViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeatherForecastForNextFewDaysViewController" id="nlA-K1-hOF" customClass="WeatherForecastViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R10-Ij-LT2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="129"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -257,7 +263,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XDd-f7-E1X">
-                                                    <rect key="frame" x="16" y="72" width="75" height="17"/>
+                                                    <rect key="frame" x="16" y="70" width="75" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -273,6 +279,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Pqn-36-EIp"/>
                     </view>
                     <connections>
                         <outlet property="collectionsDays" destination="hFP-hi-bWE" id="dNq-Mi-MCE"/>
@@ -281,6 +288,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yec-ag-st5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1460.8695652173915" y="-487.16517857142856"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KmT-6h-3hC">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dza-3Z-8yW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X32-De-zFO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="F5X-qX-ViP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cVH-19-MtH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="28.985507246376812" y="88.392857142857139"/>
         </scene>
     </scenes>
     <resources>

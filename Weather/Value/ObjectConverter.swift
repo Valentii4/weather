@@ -7,6 +7,7 @@
 
 import Foundation
 class ObjectConverter {
+    private static let TEMP_CALCULUS_SYSTEM = " °C"
     static func convertCloudness(cloudness: Double) -> String{
         switch cloudness {
         case 0:
@@ -100,5 +101,10 @@ class ObjectConverter {
         default:
             return condition
         }
+    }
+    
+    static  func tepmToString(temp: Int?) -> String?{
+        guard let tempInt = temp else{ return nil }
+        return String(tempInt) + TEMP_CALCULUS_SYSTEM
     }
 }

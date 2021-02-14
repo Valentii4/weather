@@ -7,6 +7,6 @@
 
 import Foundation
 protocol NetworkManager{
-    func weatherInCity(cityPoint: CityPoint, completionhandler: @escaping  (_ data: WeatherItem?) -> Void)
+    func weatherInCity(cityPoint: CityPoint, completionhandler: @escaping  (_ data: WeatherForecst?) -> Void)
 }
 

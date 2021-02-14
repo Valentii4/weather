@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ForecastWeatherInCityTableViewCell: UITableViewCell {
+class CityTableViewCell: UITableViewCell {
     @IBOutlet weak var picture: UIImageView!
     @IBOutlet weak var conditionLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!

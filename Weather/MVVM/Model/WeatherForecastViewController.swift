@@ -9,9 +9,8 @@ import UIKit
 
 private let reuseIdentifier = "weatherInDay"
 
-class WeatherForecastForNextFewDaysViewController: UIViewController {
-    
-    var vmWeatherForNextDays: ForecastsForNextDaysViewModel?
+class WeatherForecastViewController: UIViewController {
+    var weatherForecastVM: WeatherForecastsViewModel?
     
     @IBOutlet weak var collectionsDays: UICollectionView!
     
@@ -23,18 +22,20 @@ class WeatherForecastForNextFewDaysViewController: UIViewController {
 }
 
 //MARK: - Collection View Delegate
-extension WeatherForecastForNextFewDaysViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension WeatherForecastViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vmWeatherForNextDays?.numberOfItemsCatigories ?? 0
+        return weatherForecastVM?.numberOfItemsCatigories ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionsDays.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! WeatherForecastCollectionViewCell
-        cell.weatherViewModel = vmWeatherForNextDays?.getWeatherViewModelWithIndexPath(row: indexPath.row)
+        guard let cell = collectionsDays.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? WeatherForecastCollectionViewCell else{
+            return UICollectionViewCell()
+        }
+        cell.weatherViewModel = weatherForecastVM?.getWeatherViewModelWithIndexPath(row: indexPath.row)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        vmWeatherForNextDays?.didSelectItemAt(indexPath: indexPath.row)
+        weatherForecastVM?.didSelectForecast(indexPath: indexPath.row)
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-class ForecastsForCitiesViewModel {
+class CitiesViewModel {
     @InjectNetworkManager private var networking: NetworkManager
     @InjectCache private var cache: NSCache<NSString, WeatherViewModel>
     private lazy var arrayCitysKey = citys.keys.sorted()
@@ -34,21 +34,17 @@ class ForecastsForCitiesViewModel {
         if let vm = cache.object(forKey: cityName as NSString){
             return vm
         }
-
         let vmWeather = WeatherViewModel(cityName: cityName, imageName: nil, codition: nil,temp: nil)
         guard let cityPoint = citys[cityName] else{
             return vmWeather
         }
         networking.weatherInCity(cityPoint: cityPoint) { [cityName] (item) in
             guard let weatherItem = item else{ return }
-            vmWeather.setWeatherItem(weatherItem: weatherItem)
+            vmWeather.setWeatherForecast(weatherForecast: weatherItem)
             vmWeather.setInformationOfWeather(temp: weatherItem.temp, condition: weatherItem.condition, iconName: weatherItem.iconName)
             self.cache.setObject(vmWeather, forKey: cityName as NSString)
         }
         return vmWeather
     }
-    
-    
-    
 }
     

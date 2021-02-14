@@ -6,31 +6,38 @@
 //
 
 import Foundation
-class ForecastsForNextDaysViewModel: WeatherViewModel {
-    private var weatherForNextDays: [Weather]
+class WeatherForecastsViewModel {
+    private var weatherForecast: [Weather]
     private var selectedWeather: Weather?
-    private(set) var weatherVM: WeatherViewModel?
+    private let cityName: String
     
+    var selectedImageName: String?{
+        return selectedWeather?.icon
+    }
+    var selectedTempInt: Int?{
+        return selectedWeather?.tempAvg
+    }
+    var selectedCondition: String?{
+        return selectedWeather?.condition
+    }
+    var numberOfItemsCatigories: Int{
+        return weatherForecast.count
+    }
+    var numberOfRowsWeatherObject: Int{
+        return WeatherObject.allCases.count
+    }
     var bindUpdateInformationOfWeather: (() -> ()) = {}
     
-    var numberOfItemsCatigories: Int{
-        return weatherForNextDays.count
-    }
-    
-    var numberOfRowsWeatherObject: Int{
-        return WeatherInformation.allCases.count
-    }
-    
-    init(weatherForNextDays: [Weather], cityName: String) {
-        self.weatherForNextDays = weatherForNextDays
-        super.init(cityName: cityName, imageName: nil, codition: nil, temp: nil)
-        if let weather = weatherForNextDays.first{
+    init(weatherForecast: [Weather], cityName: String) {
+        self.weatherForecast = weatherForecast
+        self.cityName = cityName
+        if let weather = weatherForecast.first{
             selectedWeather = weather
         }
     }
     
     func getWeatherViewModelWithIndexPath(row: Int) -> WeatherViewModel {
-        let day = weatherForNextDays[row]
+        let day = weatherForecast[row]
         let vm = WeatherViewModel(cityName: cityName, imageName: day.icon, codition: day.condition, temp: day.tempAvg)
         if let date = day.date{
             vm.setDate(date: date)
@@ -38,29 +45,28 @@ class ForecastsForNextDaysViewModel: WeatherViewModel {
         return vm
     }
     
-    func didSelectItemAt(indexPath row: Int){
-        let vm = getWeatherViewModelWithIndexPath(row: row)
-        self.weatherVM = vm
-        selectedWeather = weatherForNextDays[row]
+    func didSelectForecast(indexPath row: Int){
+        selectedWeather = weatherForecast[row]
         bindUpdateInformationOfWeather()
     }
     
+    //MARK: - Table view func
     func getTitleWetherObject(indexpath row: Int) -> String {
-        return getWeatherInformation(indexPath: row).rawValue
+        return getWeatherObject(indexPath: row).rawValue
     }
     
     func getDetailWetherObject(indexpath row: Int) -> String {
-        let weatherInformation = getWeatherInformation(indexPath: row)
+        let weatherInformation = getWeatherObject(indexPath: row)
         guard  let weather = selectedWeather else {
             return ""
         }
         switch weatherInformation {
         case .tampMin:
-            return self.tepmToString(temp:weather.tempMin) ?? ""
+            return ObjectConverter.tepmToString(temp:weather.tempMin) ?? ""
         case .tempAvg:
-            return self.tepmToString(temp:weather.tempAvg) ?? ""
+            return ObjectConverter.tepmToString(temp:weather.tempAvg) ?? ""
         case .tempMax:
-            return self.tepmToString(temp:weather.tempMax) ?? ""
+            return ObjectConverter.tepmToString(temp:weather.tempMax) ?? ""
         case.windSpeed:
             return String(weather.windSpeed)
         case .windDir:
@@ -72,11 +78,11 @@ class ForecastsForNextDaysViewModel: WeatherViewModel {
         }
     }
     
-    private func getWeatherInformation(indexPath row: Int) -> WeatherInformation{
-        return WeatherInformation.allCases[row]
+    private func getWeatherObject(indexPath row: Int) -> WeatherObject{
+        return WeatherObject.allCases[row]
     }
     
-    private enum WeatherInformation: String, CaseIterable{
+    private enum WeatherObject: String, CaseIterable{
         case tempAvg = "Температура воздуха"
         case tempMax = "Максимальная температура"
         case tampMin = "Минимальная температура"
